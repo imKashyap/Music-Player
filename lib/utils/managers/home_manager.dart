@@ -3,8 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:music_player/pages/explore_page.dart';
 import 'package:music_player/pages/home_page.dart';
-import 'package:music_player/pages/library_page.dart';
+import 'package:music_player/pages/library/NoMusicFound.dart';
+import 'package:music_player/pages/library/library_home.dart';
+import 'package:music_player/pages/library/library_manager.dart';
 import 'package:music_player/widgets/custom_app_bar.dart';
+import 'package:music_player/widgets/drawer.dart';
 
 class HomeManager extends StatefulWidget {
   @override
@@ -14,14 +17,15 @@ class HomeManager extends StatefulWidget {
 class _HomeManagerState extends State<HomeManager> {
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> _pages = [
-    {'page': HomePage(), 'title': 'Home'},
-    {'page': ExplorePage(), 'title': 'Explore'},
-    {'page': LibraryPage(), 'title': 'Library'}
+    final List<Object> _pages = [
+       HomePage(),
+       ExplorePage(),
+       LibraryHome(),
   ];
     return Scaffold(
       appBar:CustomAppBar(),
-      body: _pages[selectedPage]['page'],
+      drawer: NavigationDrawer(),
+      body: _pages[selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         items: [
